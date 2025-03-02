@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #222;
+            color: white;
+        }
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+        }
+        .reel {
+            font-size: 50px;
+            margin: 10px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: black;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: gold;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎰 Slot Machine</h1>
+    <div class="slot-machine">
+        <div class="reel" id="reel1">❔</div>
+        <div class="reel" id="reel2">❔</div>
+        <div class="reel" id="reel3">❔</div>
+    </div>
+    <button onclick="spin()">Spin 🎲</button>
+    <p id="message"></p>
+
+    <script>
+        const symbols = ["🍒", "🍋", "🍊", "🍉", "⭐", "💎"];
+
+        function spin() {
+            let reels = [
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)]
+            ];
+
+            document.getElementById("reel1").textContent = reels[0];
+            document.getElementById("reel2").textContent = reels[1];
+            document.getElementById("reel3").textContent = reels[2];
+
+            checkWin(reels);
+        }
+
+        function checkWin(reels) {
+            let message = "";
+            if (reels[0] === reels[1] && reels[1] === reels[2]) {
+                message = "🎉 Jackpot! You won!";
+            } else if (reels[0] === reels[1] || reels[1] === reels[2] || reels[0] === reels[2]) {
+                message = "😊 You got a small win!";
+            } else {
+                message = "😞 Try again!";
+            }
+            document.getElementById("message").textContent = message;
+        }
+    </script>
+
+</body>
+</html>
